@@ -14,7 +14,7 @@ n = random.getrandbits(1024)
 Y = []
 start_time = time.time()
 for x in X:
-    y = (a ** x) % n
+    y = a ** x % n
     calculation_time = time.time() - start_time
     Y.append(calculation_time)
     start_time = time.time()

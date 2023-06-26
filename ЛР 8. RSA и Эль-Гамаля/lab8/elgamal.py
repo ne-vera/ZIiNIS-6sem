@@ -1,7 +1,15 @@
 import Crypto.Util.number
 from utils import *
-from sympy import primitive_root
 import time
+
+def primitive_root(p_val):
+    while True:
+        g = random.randrange(3, p_val)
+        if pow(g, 2, p_val) == 1:
+            continue
+        if pow(g, p_val, p_val) == 1:
+            continue
+        return g
 
 def generate_key(bit_num: int):
     p = Crypto.Util.number.getPrime(bit_num, randfunc = Crypto.Random.get_random_bytes)
@@ -24,8 +32,8 @@ def encode(message, package):
     b = []
     for m in message:
         k = random.randint(1, p-1)
-        a.append(g ** k % p)
-        b.append(y **k * ord(m) % p)
+        a.append(pow(g,k,p))
+        b.append(pow(y, k) * ord(m) % p)
     ciphertext = [(a[i], b[i]) for i in range(0, len(b))]
     return ciphertext
 
@@ -33,7 +41,7 @@ def decode(ciphertext, package):
     p, g, x = package
     plaintext = []
     for c in ciphertext:
-        a_x = c[0] ** x
+        a_x = pow(c[0], x)
         _, a_r, _ = extended_gcd(a_x, p)
         if a_r < 0:
             a_r = p + a_r

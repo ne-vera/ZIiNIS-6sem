@@ -1,4 +1,4 @@
-from math import *
+from math import sqrt
 import random
 
 def get_prime(min, max):

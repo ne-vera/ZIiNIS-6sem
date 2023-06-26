@@ -1,0 +1,50 @@
+MINISTRY OF EDUCATION OF THE REPUBLIC OF BELARUS
+Educational Institution "BELARUSIAN STATE
+UNIVERSITY OF TECHNOLOGY"
+
+Faculty of Information Technology
+Department of Information Systems and Technologies
+Specialty Information systems and technologies
+
+REPORT ON LABORATORY WORK №2 ON THE TOPIC:
+The study of cryptographic ciphers based on the substitution (replacement) of symbols
+
+Completed by a student of the 3rd year of the 1st group
+Prigodich Vera Valerievna
+
+Minsk 2023
+Purpose: to study and acquire practical skills in the development and use of applications for the implementation of substitution ciphers.
+Theoretical information
+Cryptanalysis is a branch of cryptology dealing with methods of breaking ciphers or methods of organizing cryptographic attacks on ciphers.
+The essence of substitution encryption is that the original text (from the set M) and the ciphertext (from the set C) are based on the use of the same or different alphabets, and the substitution algorithm is the secret or key information.
+The following types of substitution ciphers exist:
+monoalphabetic (one-to-one substitution ciphers or simple substitution ciphers);
+polygram;
+homophonic (single-sounding ciphers or ciphers of multi-valued substitution);
+- polyalphabetic.
+In monoalphabetic ciphers, the replacement operation is performed separately on each single character of the message Mi. Examples are the Caesar cipher, the Caesar cipher with a keyword (slogan), Atbash.
+Polygram ciphers include Porta, Playfair and Hill ciphers. In such ciphers, one substitution corresponds to several characters of the source text at once.
+Homophonic ciphers (homophonic substitution), or monosonic substitution ciphers, were created to increase the complexity of the frequency analysis of ciphertexts by masking the actual frequencies of occurrence of text characters using homophony. These include the book cipher.
+Polyalphabetic (or polyalphabetic) ciphers consist of several unambiguous substitution ciphers. The choice of alphabet for encrypting one character depends on the features of the encryption method. Examples are the Alberti disc, the Trisemus table, the Vigenère cipher.
+Task 1: Develop an author's application in accordance with the purpose of the laboratory work. The application must implement the following operations:
+• perform encryption/decryption of text documents (not less than 5 thousand characters) created on the basis of the language alphabet in accordance with the following table of task options; in this case, substitution ciphers from the third column of this table should be used;
+Option Alphabet Cipher
+8 English 1. Caesar cipher with keyword, keyword is own surname, a = 24
+2. Table of Trisemus, keyword - proper name
+For the Caesar encryption system with a keyword (slogan), a substitution alphabet is formed according to the following principle: the keyword is written under the letters of the alphabet, starting with the letter whose index matches the chosen number a. the original alphabet and the substitution alphabet with key 24 are as follows:
+A B C D E F G H I J K L M N O R Q R S T U V W X Y Z
+E F I J K L M N Q S T U V W X Y Z P R G O D I C H A B
+The repeating I has been removed. Encryption is carried out by replacing the letter of the message from the original alphabet with the letter corresponding to its indices in the new alphabet.
+For example, if the message Mi = "VERA", Ci = "DLPE".
+Message decryption is carried out in a similar way. The python code was used to complete the task. Let's describe the functions for working with the Caesar cipher caesar_cipher.py:
+
+Encryption using Trisemus tables is carried out as follows: a table of a certain size is formed, into which a keyword is entered line by line, and repeating letters are discarded. Then this table is supplemented with letters of the alphabet that are not included in it in order. The name was used as a key, the table was supplemented with the characters "?;,." and a 5×6 table is formed.
+v e r a b
+c d f g h
+i j k l m
+n o p q S
+t u w x y
+z? ; , .
+When encrypting, a plaintext letter is found in this table and the letter located below it in the same column is written into the ciphertext. If a text letter is in the bottom row of the table, then the topmost letter from the same column is taken for the ciphertext.
+For example, if the message is Mi = "hello", Ci = "mdqqu".
+Decryption is carried out in a similar way: they find the letter of the ciphertext in this table and write in the decrypted text the letter located above it in the same column. If a text letter appears in the top row of the table, then the lowest letter from the same column is taken for the ciphertext.

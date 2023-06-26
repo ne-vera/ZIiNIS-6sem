@@ -4,9 +4,7 @@ from schnorr_sign import Schnorr
 from hashlib import sha256
 from time import time
 
-
-message = 'v'
-
+message = 'prigodich vera'
 
 print('--------------- RSA ---------------')
 rsa = RSA(3, 3, 3)

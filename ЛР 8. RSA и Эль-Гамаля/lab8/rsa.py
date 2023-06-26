@@ -26,14 +26,14 @@ def generate_key(bit_num: int):
 
 def encode(message : str, package : tuple[int, int]):
     e, n = package
-    ciphertext = [(ord(c) ** e) % n for c in message]
+    ciphertext = [pow(ord(c), e, n) for c in message]
     return ciphertext
 
 def decode(ciphertext : str, package):
     d, n = package
     plaintext =''
     for c in ciphertext:
-        plaintext += chr((c ** d) % n)
+        plaintext += chr(pow(c,d,n))
     return (''.join(plaintext))
 
 def rsa(message: str):
